@@ -1,0 +1,239 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: "Digital 7";
+    src: url("./fonts/Digital-7-Monotype.ttf") format("truetype");
+}
+
+body {
+    background-image: linear-gradient(to bottom right, LightYellow, Khaki);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: "Roboto Light", sans-serif;
+}
+
+.shortcut-container {
+    position: relative;
+    z-index: 2;
+}
+
+.close-x {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 0;
+}
+
+.close-x:hover {
+    color: rgba(255, 0, 0, 1);
+}
+
+.shortcuts-title {
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+.shortcuts {
+    position: absolute;
+    font-size: 0.82em;
+    line-height: 1.8;
+    background-color: #c4df9b;
+    padding: 25px 15px;
+    margin: 0 10px;
+}
+
+.to-bold {
+    font-weight: bold;
+}
+
+#calculator {
+    background-color: DimGray;
+    margin: 20px auto;
+    width: 470px;
+    height: 620px;
+    border-radius: 20px;
+
+    display: grid;
+    grid-template-columns: repeat(4, 21%);
+    grid-template-rows: 21% repeat(6, 10.5%);
+    column-gap: 2%;
+    row-gap: 1.6%;
+    justify-content: center;
+    align-content: center;
+    user-select: none; /* So nobody can select the text (or any other element) with the mouse */
+}
+
+#calculator div:not(#screen) {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.6em; /* 26px */
+    cursor: pointer;
+}
+
+.screen {
+    background-color: DarkKhaki;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    cursor: default;
+    color: Black;
+    font-family: "Digital 7", "VT323", monospace;
+    font-size: 5.6em; /* 90px */
+    grid-column: 1 / 5;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding: 0 10px;
+    overflow: hidden;
+}
+
+@keyframes blinking {
+    0% {opacity: 0.9;}
+    100% {opacity: 1;}
+}
+
+.b-color {
+    background-color: rgba(0, 0, 0, 0.9); /* Black */
+}
+
+.g-color {
+    background-color: rgba(159, 159, 159, 0.9);
+}
+
+.r-color {
+    background-color: rgba(255, 0, 0, 0.9); /* Red */
+    position: relative;
+}
+
+.o-color {
+    background-color: rgba(255, 165, 0, 0.9); /* Orange */
+}
+
+.s-color {
+    background-color: rgba(192, 192, 192, 0.9); /* Silver */
+}
+/*
+:is(.b-color, .g-color, .r-color, .o-color, .s-color):hover {
+    opacity: 0.8;
+}
+ */
+
+.upper-operation {
+    font-family: sans-serif;
+    position: absolute;
+    top: -4px;
+    right: 15px;
+    font-size: 30px;
+}
+
+/* Tutorial elements styles */
+.floating-box {
+    position: absolute;
+    font-size: 1.1rem !important;
+    background-color: black;
+    color: white;
+    padding: 10px;
+    font-style: italic;
+    border-radius: 7px;
+    width: 280px;
+    /*max-width: 280px;*/
+    text-align: center;
+    font-family: "Roboto Light", sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+    z-index: 1;
+}
+
+/*
+.floating-box:hover {
+    opacity: 1 !important;
+}
+*/
+.tail-style {
+    width: 0;
+    height: 0;
+    border-top: 20px solid black;
+    border-right: 12px solid transparent;
+    border-left: 12px solid transparent;
+    position: absolute;
+    bottom: -18px;
+    background-color: transparent !important;
+}
+
+.animation-add {
+    animation: slowlyShowing, jumping;
+    animation-duration: 2s, 4s; /* 1.5 animation, 2.5 delay */
+    animation-delay: 0s, 2s;
+    animation-timing-function: linear, ease-in-out;
+    animation-iteration-count: 1, infinite;
+}
+
+.animation-removal {
+    animation: slowlyHiding;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes slowlyShowing {
+    0% {opacity: 0}
+    100% {opacity: 1}
+}
+
+@keyframes slowlyHiding {
+    0% {opacity: 1}
+    100% {opacity: 0; visibility: hidden}
+}
+
+@keyframes jumping { /* 0% 45% 70% 85% 100% */
+    0% {transform: translateY(0px)}
+    17% {transform: translateY(-20px)}
+    27% {transform: translateY(0px)}
+    32% {transform: translateY(-7px)}
+    38% {transform: translateY(0px)}
+}
+
+/* Responsiveness */
+@media screen and (max-width: 575px){
+    body {
+        min-height: 0;
+    }
+    #calculator {
+        width: 300px;
+        height: 400px;
+        border-radius: 10px;
+    }
+
+    #calculator div:not(#screen) {
+        font-size: 1em;
+    }
+
+    .screen {
+        font-size: 3.5em;
+        border-radius: 10px;
+    }
+
+    .upper-operation {
+        font-size: 15px;
+        top: 0;
+    }
+
+    .floating-box {
+        display: none !important;
+    }
+
+    .shortcut-container {
+        display: none;
+    }
+}
+

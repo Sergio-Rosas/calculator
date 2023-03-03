@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="calculator.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+
+    <title>Calculator</title>
+</head>
+<body>
+
+<div id="shortcuts" class="shortcut-container">
+    <div class="shortcuts">
+        <span class="shortcuts-title close-x">[X]</span>
+        <p class="shortcuts-title">Shortcuts:</p>
+        <p>On/Clear: <span class="to-bold">Escape key</span></p>
+        <p>Clear last entry: <span class="to-bold">Backspace key</span></p>
+        <p>Equal: <span class="to-bold">Enter key</span></p>
+        <p>Change sign: <span class="to-bold">S key</span></p>
+        <p>Square root: <span class="to-bold">R key</span></p>
+        <p>Percentage: <span class="to-bold">P key</span></p>
+        <p>Memory plus: <span class="to-bold">F9 key</span></p>
+        <p>Memory minus: <span class="to-bold">F10 key</span></p>
+        <p>Memory recall/clear: <span class="to-bold">F2 key</span></p>
+    </div>
+</div>
+
+<div id="calculator">
+
+    <div class="screen" id="screen"></div>
+
+    <div class="b-color" id="root">√</div>
+    <div class="b-color" id="percentage">%</div>
+    <div class="b-color" id="ce">CE</div>
+    <div class="r-color" id="on">ON/C</div>
+
+    <div class="g-color" id="mc">MRC</div>
+    <div class="g-color" id="m-plus">M+</div>
+    <div class="g-color" id="m-minus">M-</div>
+    <div class="g-color" id="division">÷</div>
+
+    <div class="s-color" id="seven">7</div>
+    <div class="s-color" id="eight">8</div>
+    <div class="s-color" id="nine">9</div>
+    <div class="g-color" id="times">x</div>
+
+    <div class="s-color" id="four">4</div>
+    <div class="s-color" id="five">5</div>
+    <div class="s-color" id="six">6</div>
+    <div class="g-color" id="minus">-</div>
+
+    <div class="s-color" id="one">1</div>
+    <div class="s-color" id="two">2</div>
+    <div class="s-color" id="three">3</div>
+    <div class="g-color" id="plus">+</div>
+
+    <div class="s-color" id="sign">+/-</div>
+    <div class="s-color" id="zero">0</div>
+    <div class="s-color" id="dot">.</div>
+    <div class="o-color" id="equal">=</div>
+
+</div>
+
+<script src="calculator.js"></script>
+</body>
+</html>
