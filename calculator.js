@@ -1,9 +1,3 @@
-// TODO Refactor the code (just things I know). Divide the pricipal function between event and monitoring.
-// TODO Comment what the functions do.
-// TODO Explain variables.
-// TODO Document the code (important things like description of the functions or messy code only.
-// TODO Put on GitHub, deploy and test on desktop and mobile.
-
 // ===================================
 //       Variables and listeners
 // ===================================
@@ -173,30 +167,37 @@ function initializer() {
 
 // Clears or resets the status of the calculator.
 function actionsFunc(id) {
-    if (id === "on") {
-        initializer();
-    } else if (id === "ce") {
-        num1 = "";
+    switch (id) {
+        case "on":
+            initializer();
+            break;
+        case "ce":
+            num1 = "";
+            break;
     }
 }
 
+// Converts the string ID to its cardinal representation and adds it to the num1 variable.
 function numbersFunc(strNumber) {
     num1 += strToId[strNumber];
 }
 
+// Assigns the operator the calculator will work and allow the input of the second number.
 function operation(id, number) {
-    if (operator) return operator = id;
+    if (operator) return operator = id; // Allows changing the operator.
 
     num2 = number;
     num1 = "";
     operator = id;
 }
 
+// Turn off the calculator after 5 minutes of inactivity.
 function onOffCounter() {
     clearTimeout(counter);
     counter = setTimeout( () => {calcStatus = false; screen.textContent = ""}, 300_000);
 }
 
+// Manages the sign change and the decimal point.
 function modifiersFunc(type) {
     switch (type) {
         case "sign":
@@ -207,27 +208,25 @@ function modifiersFunc(type) {
     }
 }
 
+// Manages the memory changes: add, subtract, display, and delete.
 function savingFunc(value) {
     switch (value) {
         case "m-plus":
-            if (num1) {
-                savedValue += Number(num1);
-            } else {
-                savedValue += Number(num2);
-            }
+            num1 ? savedValue += Number(num1) : savedValue += Number(num2);
             initializer();
             break;
         case "m-minus":
-            if (num1) {
-                savedValue -= Number(num1);
-            } else {
-                savedValue -= Number(num2);
-            }
+            num1 ? savedValue -= Number(num1) : savedValue -= Number(num2);
             initializer();
             break;
         case "mc":
             mcSwitch *= -1;
-            if (mcSwitch < 0) {savedValue = ""; initializer();}
+
+            if (mcSwitch < 0) {
+                savedValue = "";
+                initializer();
+            }
+
             if (!num1) {
                 num1 = savedValue;
             } else {
@@ -237,6 +236,7 @@ function savingFunc(value) {
     }
 }
 
+// It makes all the calculations after having 2 numbers and the operator.
 function calculation(number1, number2, operation, newOperator) {
     let answer = 0;
     switch (operation) {
@@ -253,11 +253,7 @@ function calculation(number1, number2, operation, newOperator) {
             answer = number2 / number1;
             break;
         case "root":
-            if (number1) {
-                answer = Math.sqrt(number1);
-            } else {
-                answer = Math.sqrt(number2);
-            }
+            number1 ? answer = Math.sqrt(number1) : answer = Math.sqrt(number2);
             break;
         case "percentage":
             answer = number2 * (number1 / 100);
@@ -269,7 +265,7 @@ function calculation(number1, number2, operation, newOperator) {
     operator = newOperator;
 }
 
-// Key mapping function.
+// Maps key pressed to calculator buttons.
 function keyMapping(e) {
     if (validKeys.includes(e.key)) {
         e.preventDefault();
@@ -278,7 +274,10 @@ function keyMapping(e) {
 }
 
 
-// ------------ Graphics ------------
+// ===================================
+//             Graphics
+// ===================================
+// Principal function that display all what happens on the calculator's screen.
 function toScreen(valid=true) {
     if (!valid) {
         screen.textContent = "Error";
@@ -293,6 +292,7 @@ function toScreen(valid=true) {
     }
 }
 
+// Converts results to number that fits the screen and to scientific notation if it doesn't.
 function fitScreen(value) {
     if (value === "") return 0;
     if (String(value).length <= 10) return value;
@@ -339,6 +339,7 @@ function opacityHover(e) {
     }
 }
 
+// Blinking effect on the screen when a key is pressed.
 function blinkingEffectOn(e) {
     if (validKeys.includes(e.key)) {
         screen.style.animationName = "blinking";
@@ -350,6 +351,7 @@ function blinkingEffectOff() {
     screen.style.animationName = "";
 }
 
+// Puts the operation symbol on the top right corner of the calculator screen.
 function upperOperation(operator) {
     screen.style.position = "relative";
 
@@ -359,7 +361,10 @@ function upperOperation(operator) {
 
     screen.append(operDisplay);
 }
-// Tutorial graphics.
+
+// ===================================
+//        Tutorial graphics.
+// ===================================
 function turnOnTutorial() {
     if (!tutorial) return;
     let onButton = document.getElementById("on");
